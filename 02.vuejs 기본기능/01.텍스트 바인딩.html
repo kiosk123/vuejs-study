@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Vue.js App</title>
+    <link href="main.css" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+       {{message}}
+    </div>
+    <script>
+        // vue 인스턴스 생성
+        let app = new Vue({
+            el: '#app',
+            data: {
+                message: 'Hello Vue.js'
+            }
+        })
+
+        //옵션에 정의한 값 외부에서 접근
+        console.log(app.message);
+    </script>
+</body>
+</html>
