@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Vue.js App</title>
+    <link href="main.css" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 텍스트 데이터 바인딩-->
+        <p style="color: rebeccapurple;">Message : {{message}}</p>
+
+        <!-- 객체와 배열의 내부 요소 출력-->
+        <p style="color: blue;">{{msg.value}}</p>
+        <p style="color: red;">{{msg.value.length}}</p>
+        <p style="color: green;">{{list[2]}}</p>
+        <p style="color: brown;">{{list[num]}}</p>
+
+        <!-- 연산 표현식 -->
+        <p>1 + 1 = {{ 1 + 1 }}</p>
+    </div>
+    <script>
+        // vue 인스턴스 생성
+        let app = new Vue({
+            el: '#app',
+            data: {
+                message: 'Hello Vue.js',
+                msg: { value: 'obj message'},
+                list: ['apple', 'banana', 'strawberry'],
+                num: 1
+            }
+        })
+    </script>
+</body>
+</html>
