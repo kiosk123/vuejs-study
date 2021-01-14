@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Vue.js App</title>
+    <link href="main.css" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <p v-if="show">Show message</p>
+    </div>
+    <script>
+        // vue 인스턴스 생성
+        let app = new Vue({
+            el: '#app',
+            data: {
+                show: true
+            }
+        })
+        // app.show = false; 를 console에서 입력하면 <p>태그 사라짐
+    </script>
+</body>
+</html>
