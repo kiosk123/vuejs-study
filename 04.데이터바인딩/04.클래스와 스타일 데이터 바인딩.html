@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Vue.js App</title>
+    <link href="main.css" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <p v-bind:class="{child:isChild, 'is-active':isActive}">Text</p>
+        <p v-bind:style="{color:textColor, backgroundColor:bgColor}">Text</p>
+    </div>
+    <script>
+        // vue 인스턴스 생성
+        let app = new Vue({
+            el: '#app',
+            data: {
+                isChild: true,
+                isActive: true,
+                textColor: 'red',
+                bgColor: 'lightgray'
+            }
+        })
+    </script>
+</body>
+</html>

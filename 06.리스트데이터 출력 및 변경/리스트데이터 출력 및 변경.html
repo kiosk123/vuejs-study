@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Vue.js App</title>
+    <link href="main.css" rel="stylesheet"/>
+    <style>
+        .strong {
+            color: red;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <!-- list 변경할때 효율적인 렌더링 처리를 위해 key 속성설정 권장 -->
+            <li v-for="item in list" v-bind:key="item.id">
+                ID.{{item.id}} {{item.name}} HP.{{item.hp}}
+            </li>
+        </ul>
+
+        <!-- index도 같이 받기 -->
+        <ul>
+            <li v-for="(item, index) in list" >
+                index : {{index}} ID.{{item.ID}} {{item.name}} HP.{{item.hp}}
+                <button v-on:click="doAttack(index)">공격</button>
+                <button v-on:click="doRemove(index)">삭제</button>
+            </li>
+        </ul>
+
+        <!-- 객체 반복 처리 -->
+        <ul>
+            <li v-for="(value, propName, index) in obj">
+                {{index}} : {{propName}} : {{value}}
+            </li>
+        </ul>
+
+         <!-- hp가 300보다 클때 strong 클래스 적용 -->
+        <ul>
+            <li v-for="item in list" v-bind:key="item.id" v-bind:class="{ strong:item.hp > 300 }">
+                ID.{{item.id}} {{item.name}} HP.{{item.hp}}
+            </li>
+        </ul>
+
+        <!-- hp가 300보다 작은 것만 출력 -->
+        <ul>
+            <li v-for="item in list" v-bind:key="item.id" v-if="item.hp < 300">
+                ID.{{item.id}} {{item.name}} HP.{{item.hp}}
+            </li>
+        </ul>
+
+        <!-- 새 몬스터 추가-->
+        <p>
+            새로운 값 <br>
+            이름 : <input v-model="name"/> <br/>
+            hp : <input v-model.number="hp"/> <br/>
+            <button v-on:click="addNew">추가</button>
+        </p>
+
+        <!-- 특정 인덱스의 요소 변경-->
+        <p>
+            배열 특정 인덱스 요소 변경<br>
+            인덱스 <select v-model.number="selectIdx">
+                        <option disabled value="">선택</option>
+                        <option v-for="(item, index) in list" v-bind:value="index">{{item.id}}</option>
+                   </select>
+            이름 : <input v-model="updateName"/> <br/>
+            hp : <input v-model.number="updateHp"/> <br/>
+            <button v-on:click="modifyByIndex">인덱스 변경</button>
+        </p>
+
+
+    </div>
+    <script>
+        // vue 인스턴스 생성
+        let app = new Vue({
+            el: '#app',
+            data: {
+                list: [
+                    {id: 1, name: '슬라임', hp:100},
+                    {id: 2, name: '고블린', hp:300},
+                    {id: 3, name: '드래곤', hp:500}
+                ],
+                obj: {name: '여우', hp:100},
+                name: "",
+                hp: 0,
+                selectIdx: "",
+                updateName: "",
+                updateHp: 0
+            },
+            methods: {
+                addNew: function() { //데이터 추가
+                    const max = this.list.reduce((r, item) => {
+                        return (r > item.id) ? r : item.id;
+                    }, 0);
+
+                    const newId = max + 1;
+                    const newItem = {id : newId, name: this.name, hp: this.hp};
+                    this.list.push(newItem);
+                },
+                doRemove: function(index) { //삭제
+                    this.list.splice(index, 1);
+                },
+                modifyByIndex: function() {
+                    if (typeof this.selectIdx === "string") {
+                        alert("리스트에 데이터가 없거나 인덱스가 선택되지 않았습니다.");
+                        return;
+                    }
+                    console.log(typeof this.selectIdx);
+                    //인덱스를 이용한 배열 또는 객체 요소 변경은 Vue.set(<변경대상>, <인덱스 또는 키>, <새로운값>) 
+                    //Vue.set은 this.$set이란 별칭으로 내부에서 활용가능
+                    const index = this.selectIdx;
+                    const id = this.list[index].id;
+                    this.$set(this.list, index, {id: id, name: this.updateName, hp: this.updateHp})
+
+                    // 리스트의 모든 객체에 active 프로퍼티 추가하기
+                    // this.list.forEach(function(item) {
+                    //     this.$set(item, 'active', false) //이렇게 추가해야 리액티브 추적이 가능
+                    // });
+
+                    // 리스트 자체 변경
+                    // 배열 메서드의 filter 등 배열을 직접 변경하지 않는 메서드는 리스트 변수에 다시 리스트 할당해서 내용 변경
+                    // this.list = this.list.filter(function(item) {
+                    //     return item.hp > 300;
+                    // })
+                },
+                doAttack: function(index) {
+                    //리스트 요소 속성 변경
+                    alert("몬스터에게 피해를 입혔습니다.");
+                    this.list[index].hp -= 10;
+                }
+                
+            }
+        })
+    </script>
+</body>
+</html>

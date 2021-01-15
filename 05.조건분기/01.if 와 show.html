@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Vue.js App</title>
+    <link href="main.css" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 주석으로 출력! 렌더링 자체가 안되므로 데이터 변경 감지도 안함 -->
+        <div v-if="ok">v-if</div>
+
+        <!-- style로 보이지 않도록 함! 눈에 보이지 않다로 DOM 자체는 존재하기에 데이터 변경 감지함-->
+        <div v-show="ok">v-show</div>
+
+        <!-- 그룹핑 조건 분기는 v-if만 가능 -->
+        <template v-if="visible">
+            <header>타이틀</header>
+            <div>콘텐츠</div>
+        </template>
+
+        <!-- if else -->
+        <div v-if="type === 'A'">
+            type is A
+        </div>
+        <div v-else-if="type === 'B'">
+            type is B
+        </div>
+        <div v-else>
+            type is {{type}}
+        </div>
+
+
+        <!-- key는 가상DOM에서 변경이 필요한 요소는 key 속성을 부여해서 변경되도록 해야함-->
+        <div v-if="visible" >
+            A <input type="text" key="a"/>
+        </div>
+        <div v-else>
+            B <input type="text" key="b"/>
+        </div>
+
+    </div>
+    <script>
+        // vue 인스턴스 생성
+        let app = new Vue({
+            el: '#app',
+            data: {
+                ok:false,
+                visible:true,
+                type: 'B'
+            }
+        })
+    </script>
+</body>
+</html>
