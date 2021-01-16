@@ -7,7 +7,7 @@ data : 어플리케이션에서 사용할 데이터. - 객체, 배열 등..
 computed : 함수로 인해 산출되는 데이터  
 methods : 애플리케이션에서 사용할 메서드 데이터처리나, 이벤트 핸들러 구현등에 사용  
 
-**라이프 사이클 hook** - Vue 인스턴스 라이프 사이클 중에 등록되어 특정 시점에 실행되는 콜백 - [참고] (https://medium.com/witinweb/vue-js-%EB%9D%BC%EC%9D%B4%ED%94%84%EC%82%AC%EC%9D%B4%ED%81%B4-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0-7780cdd97dd4) 
+**라이프 사이클 hook** - Vue 인스턴스 라이프 사이클 중에 등록되어 특정 시점에 실행되는 콜백 - [참고](https://medium.com/witinweb/vue-js-%EB%9D%BC%EC%9D%B4%ED%94%84%EC%82%AC%EC%9D%B4%ED%81%B4-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0-7780cdd97dd4)
 |  **메서드** | **실행시점**  |
 |---|---|
 | **beforeCreate**  | 인스턴스가 생성되고, 리액티브 초기화가 일어나기 전 - created와의 차이는 리액티브 데이터의 초기화 전에 호출  |
