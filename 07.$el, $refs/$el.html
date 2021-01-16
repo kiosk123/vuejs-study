@@ -8,19 +8,17 @@
 </head>
 <body>
     <div id="app">
-        <!-- methods.handleClick과 매핑됨 -->
-        <button v-on:click="handleClick">Click</button>
-        <button @click="handleClick">Click</button>
+
     </div>
     <script>
         // vue 인스턴스 생성
         let app = new Vue({
             el: '#app',
-            methods: {
-                handleClick: function(event) {
-                    console.log(event.target);
-                    alert(event.target);
-                }
+            data: {
+            },
+            mounted: function() {
+                // 템플릿을 감싸고 있는 root 요소 참조
+                console.log(this.$el); // <div id="app"></div>
             }
         })
     </script>

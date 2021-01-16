@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Vue.js App</title>
+    <link href="main.css" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
+    <style>
+
+        [v-cloak] {display: none;} /* Vue 인스턴스 컴파일 끝날때까지 안보임 */
+        /* @keyframes cloak-in {
+            0% {opacity: 0;}
+        }
+
+        #app {
+            animation: cloak-in ls;
+        }
+
+        #app[v-cloak] {
+            opacity: 0;
+        } */
+    </style>
+</head>
+<body>
+    <div id="app" v-cloak>
+        {{ message }}
+    </div>
+    <script>
+        // vue 인스턴스 생성
+        let app = new Vue({
+            el: '#app',
+            data: {
+                url: 'http://www.naver.com',
+                message: "Hello World"
+            }
+        })
+    </script>
+</body>
+</html>

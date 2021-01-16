@@ -8,19 +8,18 @@
 </head>
 <body>
     <div id="app">
-        <!-- methods.handleClick과 매핑됨 -->
-        <button v-on:click="handleClick">Click</button>
-        <button @click="handleClick">Click</button>
+        <!--ref 값의 hello를 이용해 참조-->
+        <p ref="hello">Hello</p> 
     </div>
     <script>
         // vue 인스턴스 생성
         let app = new Vue({
             el: '#app',
-            methods: {
-                handleClick: function(event) {
-                    console.log(event.target);
-                    alert(event.target);
-                }
+            data: {
+            },
+            //루트 이외의 요소에 접근
+            mounted: function() {
+                console.log(this.$refs.hello); //<p ref="hello">Hello</p> 
             }
         })
     </script>

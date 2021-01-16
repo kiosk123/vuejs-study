@@ -8,19 +8,18 @@
 </head>
 <body>
     <div id="app">
-        <!-- methods.handleClick과 매핑됨 -->
-        <button v-on:click="handleClick">Click</button>
-        <button @click="handleClick">Click</button>
+        <!-- v-pre는 자식 컴포넌트를 포함한 html등을 컴파일 하지 않고 text(정적) 데이터로 표시할때 사용 - 서버사이드 렌더링때 XSS 공격 방지-->
+        <a v-bind:href="url" v-pre>
+            Hello {{message}}
+        </a>
     </div>
     <script>
         // vue 인스턴스 생성
         let app = new Vue({
             el: '#app',
-            methods: {
-                handleClick: function(event) {
-                    console.log(event.target);
-                    alert(event.target);
-                }
+            data: {
+                url: 'http://www.naver.com',
+                message: "Vue.js!"
             }
         })
     </script>

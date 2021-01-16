@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Vue.js App</title>
+    <link href="main.css" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- v-once는 템플릿을 최초 딱 한번만 컴파일 하고 이후에는 하지 않음-->
+        <a v-bind:href="url" v-once>
+            Hello {{message}}
+        </a>
+    </div>
+    <script>
+        // vue 인스턴스 생성
+        let app = new Vue({
+            el: '#app',
+            data: {
+                url: 'http://www.naver.com',
+                message: "Vue.js!"
+            },
+            mounted: function() {
+                let callCount = 0;
+                let originMessage = this.message;
+                setInterval(() => { 
+                    this.message = `${originMessage}  ${++callCount}`; //message 변경을 시도하지만 변하지 않음 
+                    console.log(this.message);
+                }, 100);
+            }
+        })
+    </script>
+</body>
+</html>

@@ -8,18 +8,21 @@
 </head>
 <body>
     <div id="app">
-        <!-- methods.handleClick과 매핑됨 -->
-        <button v-on:click="handleClick">Click</button>
-        <button @click="handleClick">Click</button>
+        <input type="text" :value="message" @input="handleInput" />
     </div>
     <script>
         // vue 인스턴스 생성
         let app = new Vue({
             el: '#app',
+            data: {
+                message:""
+            },
             methods: {
-                handleClick: function(event) {
-                    console.log(event.target);
-                    alert(event.target);
+                handleInput: function(event) {
+                    // 값을 가져와서 리액티브 데이터에 바인딩하기전 처리가능
+                    const value = event.target.value;
+                    console.log(value);
+                    this.message = value;
                 }
             }
         })
