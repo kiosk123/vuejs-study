@@ -38,12 +38,37 @@ new Vue({
         }
     }
 })
-```
 
-```
+//...
 <div id="app">
     <header :class="{compact: scrollY > 200}">
         200px 이상 스크롤했으면, .compact 클래스 추가
     </header>
 </div>
 ```
+
+## 스무스 스크롤 구현하기
+페이지 가장 위로 부드럽게 이동하는 스무스 스크롤을 구현할 때는 window 객체를 조작해야한다.  
+다음은 [라이브러리](https://github.com/cferdinandi/smooth-scroll)를 이용해서 스무스 스크롤을 사용하는 예제다.
+
+```
+<script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
+<div id="app">
+    <div class="content">...</div>
+    <div v-on:click="scrollTop">
+        페이지 상단으로 이동하기
+    </div>
+</div>
+
+//...
+const scroll = new SmoothScroll();
+new Vue({
+    el: '#app',
+    methods: {
+        scrollTop: function() {
+            scroll.animateScroll(0);
+        }
+    }
+})
+```
+
