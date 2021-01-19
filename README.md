@@ -1,7 +1,6 @@
-# vuejs 정리
+# vuejs 정리 - [참고](https://rintiantta.github.io/jpub-vue/)
 vuejs 공부한 내용을 정리한다.  
 버전 : 2.6.10
-
 
 ## 연관 사이트
 vuejs는 쉽게 재사용할 수 있는 vuejs 전용 컴포넌트가 공개되어 있다.  
@@ -18,4 +17,11 @@ Jquery UI와 부트스트랩을 사용하지 않더라도 동등한 기능을 �
 ### Onsen UI
 하이브리드 모바일 애플리케이션 전용 UI 컴포넌트. 감각적이고 직관적인 UI/UX가 특징  
 [Onsen UI](https://onsen.io)
+
+
+## 기타 유용한 라이브러리
+### Lodash
+자바스크립트 배열, 숫자타입, 객체타입, 문자타입등을 쉽고 간편하게 처리할 수 있도록 도와주는 유틸리티 라이브러리
+[Lodash](https://lodash.com/)
+
 

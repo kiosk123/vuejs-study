@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Vue.js App</title>
+    <link href="main.css" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+       <ol>
+           <li>{{computedData}}</li>
+           <li>{{computedData}}</li>
+       </ol>
+       <ol>
+        <li>{{methodData()}}</li>
+        <li>{{methodData()}}</li>
+    </ol>
+    </div>
+    <script>
+        let app = new Vue({
+            el: '#app',
+            data: {
+                width: 500
+            },
+            methods: {
+                methodData: function() {
+                    return Math.random();
+                }
+            },
+            computed: {
+                //산출 속성의 결과값은 캐시 된다. 캐시가 갱신되는 경우는 리액티브 데이터만 가능
+                //다음과 같이 Math.random()으로 매번 무작위의 값을 생성하려해도 Math.random()이 리액티브 데이터가 아니기 때문에 같은 결과값만 나옴
+                computedData: function() {
+                    return Math.random();
+                }
+            }
+        })
+    </script>
+</body>
+</html>

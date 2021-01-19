@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Vue.js App</title>
+    <link href="main.css" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div>{{halfWidth}}</div>
+    </div>
+    <script>
+        // 어떤 데이터를 처리 후 반환하는 함수를 computed 옵션에 정의 후 반환
+        // comptuted 옵션에 정의한 함수이름을 {{}}로 바인딩하여 처리
+        let app = new Vue({
+            el: '#app',
+            data: {
+                width: 500
+            },
+            computed: {
+                halfWidth: function() {
+                    return this.width / 2;
+                }
+            }
+        })
+    </script>
+</body>
+</html>
