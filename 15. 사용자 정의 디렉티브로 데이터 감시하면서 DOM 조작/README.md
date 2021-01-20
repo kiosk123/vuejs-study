@@ -76,7 +76,7 @@ Vue.directive('example', {
     console.log('v-example unbind')
   }
 })
-``` |
+```
 
 ### 훅 매개변수
 각각의 훅에는 다음과 같은 매개변수를 전달할 수 있다.
@@ -95,6 +95,34 @@ Vue.directive('example', function(el, binding, vnode, oldVnode) {
 ```
 
 ### 동영상 조작
+
+```
+<div id="app">
+  <!--동영상1 -->
+  <button v-on:click="video1=true">재생</button>
+  <button v-on:click="video1=false">중지</button>
+  <video src="movie1.mp4" v-video="video1"></video>
+
+  <!--동영상2 -->
+  <button v-on:click="video2=true">재생</button>
+  <button v-on:click="video2=false">중지</button>
+  <video src="movie2.mp4" v-video="video2"></video>
+</div>
+
+new Vue({
+  el: '#app',
+  data: {
+    video1: false,
+    video2: false,
+  },
+  // bind와 update일때 훅실시
+  directives: {
+    video(el, binding) {
+      binding.value ? el.play() : el.pause()
+    }
+  }
+})
+```
 update 훅은 바인드하고 있는 속성의 변화뿐만 아니라 해당 요소를 포함하고 있는 컴포넌트의 가상 DOM에 변화가 있을 때도 호출된다  
 따라서 video1 속성이 변화하면 데이터 변화도 발생하므로, 컴포넌트가 다시 렌더링 되어 video2 속성을 바인드하고 있는 요소의 디렉티브도 함께 호출됨 -> 비효율적
 
