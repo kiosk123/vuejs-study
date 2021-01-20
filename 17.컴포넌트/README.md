@@ -88,7 +88,7 @@ Vue.component('my-component', {
   //템플릿의 루트요소는 반드시하나 <p><div></div></p>는 가능하지만 <p></p><div></div>는 불가
   template: '<p>{{message}}</p>',
   mathods: {
-    //메서드, 산출 속성, 원처의 정의 방법은
+    //메서드, 산출 속성, 워처의 정의 방법은
     //루트 생성자 객체와 같음
   }
 })
