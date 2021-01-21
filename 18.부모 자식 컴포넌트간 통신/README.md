@@ -65,7 +65,8 @@ const app = new Vue({ el: '#app' })
 - 자식에서 부모로 데이터 전달
   - 자식[$emit] -> 부모[on]
 
-## 부모에서 자식으로 데이터 전달
+## 부모에서 자식으로 데이터 흐름
+### 부모에서 자식으로 데이터 전달
 부모 컴포넌트의 템플릿에서 자식 컴포넌트를 사용할 때,  
 속성으로 컴포넌트에 데이터를 가지도록 할 수 있음
 
@@ -200,7 +201,7 @@ new Vue({
 
 ```
 
-**주의**  
+**주의!**  
 **props는 리액티브 상태이므로 부모 쪽에서 데이터를 변경하면 자식 쪽의 상태도 변경된다.**  
 메서드 내부에서는 this를 사용해서 자기 자신의 데이터처럼 사용할 수 있다.
 
@@ -318,4 +319,122 @@ new Vue({
 <example v-bind:value="value"></example>
 ```
 
+## 자식에서 부모로 데이터흐름
 
+자식 컴포넌트의 상태에 따라서 부모 컴포넌트에서 어떤 액션을 실시하도록 처리하거나,  
+자식 컴포넌트가 가진 데이터를 부모 컴포넌트에 전달하고 싶을 때는 사용자 정의 이벤트와 $emit이라는 인스턴스 메서드를 사용  
+  
+자식[$emit] -> 부모[on]
+```
+//부모 코드
+<child-comp v-on:childs-event="parentsMethod">
+
+//자식 코드
+this.$emit('childs-event')
+```
+
+### 자식 이벤트를 부모에서 캐치
+```
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
+
+
+<div id="app">
+    <comp-parent></comp-parent>
+</div>
+
+
+<script>
+//자식 컴포넌트
+Vue.component('comp-child', {
+  template: '<button v-on:click="handleClick">이벤트 호출하기</button>',
+  methods: {
+    handleClick: function() {
+      this.$emit('childs-event') //comp-child의 v-on:childs-event
+    }
+  }
+})
+
+//부모 컴포넌트
+Vue.component('comp-parent', {
+  template: '<comp-child v-on:childs-event="parentsMethod"></comp-child>',
+  methods: {
+    parentsMethod: function() {
+        alert('이벤트를 받았습니다')
+    }
+  }
+})
+
+
+new Vue({
+  el: '#app'
+})
+
+</script>
+
+```
+
+### 부모가 가진 데이터 조작하기
+$emit의 두번째 파라미터 부터 부모 이벤트 함수의 파라미터로 전달 
+```
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
+
+
+<div id="app">
+    <comp-parent></comp-parent>
+</div>
+
+
+<script>
+//자식 컴포넌트
+Vue.component('comp-child', {
+  template: '<li>{{name}} HP.{{hp}} <button v-on:click="doAttack">공격하기</button></li>',
+  props: {id:Number, name:String, hp:Number},
+  methods: {
+    doAttack: function() {
+      //$emit의 파라미터가 v-on:attack="handleAttack" 파라미터로 바인딩
+      this.$emit('attack', this.id)
+    }
+  }
+})
+
+//부모 컴포넌트
+Vue.component('comp-parent', {
+  template: '<ul>'+
+            '<comp-child v-for="item in list"'+
+            'v-bind:key="item.id" v-bind="item"'+
+            'v-on:attack="handleAttack">'+
+            '</comp-child>'+
+            '</ul>',
+  data: function() {
+    return {
+      list: [
+        { id: 1, name: '슬라임', hp: 100 },
+        { id: 2, name: '고블린', hp: 200 },
+        { id: 3, name: '드래곤', hp: 500 }
+      ]
+    }
+  },
+  methods: {
+    handleAttack: function(id) {
+      const item = this.list.find(function(el) {
+        return el.id === id;
+      })
+
+      if (item !== undefined && item.hp > 0) {
+        alert(`${item.name}이 공격받았습니다.`)
+        item.hp -= 10
+      }
+    }
+  }
+})
+
+
+new Vue({
+  el: '#app'
+})
+
+</script>
+
+```
