@@ -1,7 +1,7 @@
 ## 컴포넌트간 통신
 컴포넌트 인스턴스는 각자의 스코프를 가짐.  
 스코프 내부의 데이터와 메서드는 this를 이용하여 접근
-```
+```js
 this.message
 this.update()
 ```
@@ -16,7 +16,7 @@ this.update()
 템플릿에서 다른 컴포넌트를 사용하면 부모 자식 관계가 생성된다.  
 루트 인스턴스를 부모로 갖는 경우에도 루트 컴포넌트를 부모 컴포넌트라고 한다.
 
-```
+```html
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
 
@@ -70,7 +70,7 @@ const app = new Vue({ el: '#app' })
 부모 컴포넌트의 템플릿에서 자식 컴포넌트를 사용할 때,  
 속성으로 컴포넌트에 데이터를 가지도록 할 수 있음
 
-```
+```html
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
 
@@ -120,7 +120,7 @@ const app = new Vue({ el: '#app' })
 ```
 
 ### 부모컴포넌트의 리액티브 데이터를 자식 컴포넌트에 전달
-```
+```html
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
 
@@ -163,7 +163,7 @@ const app = new Vue({ el: '#app' })
 ```
 
 v-for를 이용해 리스트를 반복해서 렌더링도 가능
-```
+```html
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
 
@@ -205,7 +205,7 @@ new Vue({
 **props는 리액티브 상태이므로 부모 쪽에서 데이터를 변경하면 자식 쪽의 상태도 변경된다.**  
 메서드 내부에서는 this를 사용해서 자기 자신의 데이터처럼 사용할 수 있다.
 
-```
+```html
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
 
@@ -265,7 +265,7 @@ props로 받을 자료형을 지정할 수 있다.
 |생성자| 함수	인스턴스|	new Cat()|
 |null|	모든 자료형|	1, '1', [1]|
 
-```
+```html
 //자료형 확인을 생략하는 경우
 Vue.component('example', {
   props: ['value']
@@ -325,7 +325,7 @@ new Vue({
 자식 컴포넌트가 가진 데이터를 부모 컴포넌트에 전달하고 싶을 때는 사용자 정의 이벤트와 $emit이라는 인스턴스 메서드를 사용  
   
 자식[$emit] -> 부모[on]
-```
+```html
 //부모 코드
 <child-comp v-on:childs-event="parentsMethod">
 
@@ -334,7 +334,7 @@ this.$emit('childs-event')
 ```
 
 ### 자식 이벤트를 부모에서 캐치
-```
+```html
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
 
@@ -376,7 +376,7 @@ new Vue({
 
 ### 부모가 가진 데이터 조작하기
 $emit의 두번째 파라미터 부터 부모 이벤트 함수의 파라미터로 전달 
-```
+```html
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
 
